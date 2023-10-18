@@ -2,7 +2,7 @@
 
 const PostUser = () => {
 
-    const handlePostUser = (e) => {
+    const handlePostUser = async (e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -18,17 +18,32 @@ const PostUser = () => {
         };
         console.log(myData);
         
-        fetch('http://localhost:5000/users', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(myData),
-        })
-        .then(res => res.json())
-        .then(data => {
+        // fetch('http://localhost:5000/users', {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(myData),
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //     console.log(data);
+        // })
+
+        try {
+            const res = await fetch('http://localhost:5000/users', {
+                method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(myData),
+            });
+            const data = await res.json();
             console.log(data);
-        })
+            
+        } catch (error) {
+            console.error(error)
+        }
 
     }
 
