@@ -1,3 +1,4 @@
+import axios from "axios";
 
 
 const PostUser = () => {
@@ -17,6 +18,8 @@ const PostUser = () => {
             password,
         };
         console.log(myData);
+
+        // .then method 
         
         // fetch('http://localhost:5000/users', {
         //     method: "POST",
@@ -30,20 +33,40 @@ const PostUser = () => {
         //     console.log(data);
         // })
 
-        try {
-            const res = await fetch('http://localhost:5000/users', {
-                method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(myData),
-            });
-            const data = await res.json();
-            console.log(data);
+        // await async method 
+
+        // try {
+        //     const res = await fetch('http://localhost:5000/users', {
+        //         method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //             },
+        //             body: JSON.stringify(myData),
+        //     });
+        //     const data = await res.json();
+        //     console.log(data);
+        //     // ------alert-----
+        //     if(data.acknowledged){
+        //         alert("data posted successfully");
+        //     }
             
-        } catch (error) {
-            console.error(error)
-        }
+        // } catch (error) {
+        //     console.error(error)
+        // }
+
+        // axios method 
+        try {
+            const response = await axios.post("http://localhost:5000/users", myData, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            console.log(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+
+
 
     }
 
